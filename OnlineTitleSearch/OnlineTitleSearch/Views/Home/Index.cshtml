@@ -1,0 +1,69 @@
+﻿@model SearchQueryModel
+@{
+    ViewData["Title"] = "Online Keyword Search";
+}
+
+
+<br />
+<br />
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.KeyWord)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.KeyWord, new { @class = "form-control" })
+                    <br>
+                    @Html.ValidationMessageFor(model => model.KeyWord)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Website)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Website, new { @class = "form-control" })
+                    <br>
+                    @Html.ValidationMessageFor(model => model.Website)
+                </div>
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ResultSetCount)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.ResultSetCount, new { @class = "form-control" })
+                    <br>
+                    @Html.ValidationMessageFor(model => model.ResultSetCount)
+                </div>
+
+
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Submit Request")
+                <div class="input-group">
+                    <input type="submit" class="btn btn-success" value="Submit" />
+                </div>
+
+            </div>
+        </div>
+        @if (!String.IsNullOrWhiteSpace(Model.Result))
+        {
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <span>
+                        <b>'@Model.Website'</b> appeared in <b>'@Model.Result'</b> position(s) while searching for <b>'@Model.KeyWord'</b> out of <b>'@Model.ResultSetCount'</b> results searched in.
+                    </span>
+                </div>
+
+            </div>
+        }
+    </div>
+}
